@@ -3,8 +3,6 @@
  */
 
 THREE.TrackballControls = function ( object, domElement ) {
-    console.log("domElement is undefined?" + (domElement === undefined));
-    console.log(domElement);
 
 	THREE.EventTarget.call( this );
 

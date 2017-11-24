@@ -46,15 +46,15 @@ Global.generateMap = function() {
     	name : 'Europa',
     	radius : 19000,
     	scene : scene,
-	matrice : true,
+	    matrice : true,
     	star : {
     	    radius : 700,
     	    rotation_time : 350,
 	    propagation : {
-		enabled : true,
-		speed : 70,
-		max : 14000,
-		min : 700
+            enabled : true,
+            speed : 70,
+            max : 14000,
+            min : 700
 	    },	    
     	    satellites : [
 		{
@@ -66,7 +66,7 @@ Global.generateMap = function() {
     		    type : 'vividEarth',
     		    revolution_time : 700,
     		    rotation_time : 100,
-    		    satellites : [{
+    		    satellites : [/*{
     			name : 'Lune',
     			radius : 100,
 			rotation : 50,
@@ -82,8 +82,8 @@ Global.generateMap = function() {
     			type : 'Moon',
     			revolution_time : 100,
     			rotation_time : 3
-    		    }]
-		},
+    		    }*/]
+		}/*,
 		{
     		name : 'Earth',
     		radius : 100,
@@ -149,7 +149,7 @@ Global.generateMap = function() {
     		    rotation_time : 3,
 		    rotation : -20
     		}]
-	    }]
+	    }*/]
 	}
     });
 

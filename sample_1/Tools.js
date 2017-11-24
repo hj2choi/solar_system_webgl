@@ -2,17 +2,18 @@
 Tools = {};
 
 Tools.initStats = function(div) {
-    stats = new Stats();
+    // do nothing for now
+/*    stats = new Stats();
     stats.domElement.style.position = 'absolute';
     stats.domElement.style.top = '0px';
     stats.domElement.style.zIndex = 100;
-    div.appendChild(stats.domElement);
+    div.appendChild(stats.domElement);*/
 }
 
 
 
 Tools.addCoordinateAxes = function(objecto, size) {
-    size = (typeof size === 'undefined' ? 50 : size);
+    /*size = (typeof size === 'undefined' ? 50 : size);
     
     function v(x,y,z){ 
         return new THREE.Vector3(x,y,z); 
@@ -31,22 +32,13 @@ Tools.addCoordinateAxes = function(objecto, size) {
     });
     var line = new THREE.Line(lineGeo, lineMat);
     line.type = THREE.Lines;
-    objecto.add(line);
+    objecto.add(line);*/
 }
 
 
 Tools.trackballControl = function() {
     controls = new THREE.TrackballControls( camera );
 
-    controls.rotateSpeed = 1.0;
-    controls.zoomSpeed = 1.2;
-    controls.panSpeed = 0.8;
-
-    controls.noZoom = false;
-    controls.noPan = false;
-
+    // only need to modify the following properties: staticMoving (default to false)
     controls.staticMoving = true;
-    controls.dynamicDampingFactor = 0.3;
-
-    controls.keys = [ 65, 83, 68 ];
 }

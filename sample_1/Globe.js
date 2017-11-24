@@ -20,8 +20,9 @@ function Globe(prm) {
 
     
     this.axis_one.rotation.x = (Math.PI/180) * (prm.rotation || 0);
-    if (prm.rotation)
-	self.pivot.rotation.y = (Math.PI/180) * -50;
+    console.log(prm)
+    /*if (prm.rotation)
+	self.pivot.rotation.y = (Math.PI/180) * -50;*/
     
     prm.coordinates = (prm.coordinates ? prm.coordinates : [0,0,0]);
     this.x = prm.coordinates[0];
@@ -31,10 +32,6 @@ function Globe(prm) {
 
     this.matrice_radius = prm.matrice_radius || 1000;
 
-
-
-    
-    
     this.propagation_struct = {
 	current_radius : 0,
 	circle : null,
@@ -51,16 +48,16 @@ function Globe(prm) {
 
     // Is the center of the solar system
     if (prm.parent_el && self.is_satellite == false) {
-	prm.parent_el.add(this.axis_two);
+	    prm.parent_el.add(this.axis_two);
     }
     // It's a satellite
     else if (prm.parent_el && self.is_satellite) {
-	self.axis_one.add(self.pivot);
-	self.pivot.add(self.axis_two);
-	prm.parent_el.add(self.axis_one);
+        self.axis_one.add(self.pivot);
+        self.pivot.add(self.axis_two);
+        prm.parent_el.add(self.axis_one);
     }
 
-	
+	console.log(this.pivot);
     
     this.drawGlobe();
     this.buildSatellites();
@@ -71,7 +68,9 @@ function Globe(prm) {
 	self.animation_functions.push(function() {
 	    self.propagation();
 	});
-	this.propagation();
+	//this.propagation();
+	console.log('printing')
+	console.log(this.propagation);
     }
     // if (prm.project) 
     // 	self.projectDraw();
@@ -151,13 +150,13 @@ Globe.prototype.drawGlobe = function() {
 }
 
 Globe.prototype.projectDraw = function() {
-    var self = this;
+    /*var self = this;
     var geometry2 = new THREE.Geometry();
     geometry2.vertices.push(new THREE.Vector3(0, 0, 0));
     geometry2.vertices.push(new THREE.Vector3(0, -self.y, 0));
 	
     var line2 = new THREE.Line(geometry2, new THREE.LineBasicMaterial({
-        color: 0xeeeeee,
+        color: 0xff0000*//*0xeeeeee*//*,
 	opacity : 0.3
     }));
 
@@ -182,11 +181,11 @@ Globe.prototype.projectDraw = function() {
     circle.position.set(0, -self.y, 0);
 
     self.axis_two.add(circle);
-    this.axis_two.add(line2);
+    this.axis_two.add(line2);*/
 }
 
 Globe.prototype.propagation = function() {
-    var self = this;
+    /*var self = this;
     var prop = self.propagation_struct;
 
 
@@ -217,5 +216,5 @@ Globe.prototype.propagation = function() {
     
     
     prop.circle.rotation.set(Math.PI/2, 0, 0);
-    self.axis_two.add(prop.circle);
+    self.axis_two.add(prop.circle);*/
 }
