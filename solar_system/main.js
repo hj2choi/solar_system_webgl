@@ -4,10 +4,11 @@ if (!Detector.webgl) {
 }
 
 var renderer, camera, scene, div, controller;
-
 var aspect = window.innerWidth / window.innerHeight;
-
 var clock = new THREE.Clock();
+
+var option_play = true;
+
 
 SYSTEM = {}
 
@@ -39,6 +40,7 @@ SYSTEM.init = function() {
     //trackballControl(scene);
     //Initiate TrackballControls
     controller = new THREE.TrackballControls(camera, renderer.domElement);
+    displayGUI();
 
     Utils.addBackgroundStars(scene,30000);
     // LIGHT
@@ -88,7 +90,7 @@ SYSTEM.create_solar_sys = function() {
     //var star = create_star(star_info.radius, star_info.rot_time, planets);
 
     var star = {
-      radius : 600,
+      radius : 1000,
       rot_time : 350,
       satellites : [
         {
@@ -103,7 +105,8 @@ SYSTEM.create_solar_sys = function() {
           satellites : [{
             name : 'moon1',
             radius : 10,
-            pos : [140, 0, 0],
+            rotation:40,
+            pos : [200, 0, 0],
             type : 'Moon',
             rev_time : 20,
             rot_time : 3
@@ -175,7 +178,7 @@ SYSTEM.create_solar_sys = function() {
             name : 'moon1',
             radius : 80,
             rotation : 50,
-            pos : [800, 0, 0],
+            pos : [1050, 0, 0],
             type : 'Moon',
             rev_time : 200,
             rot_time : 3
@@ -183,7 +186,7 @@ SYSTEM.create_solar_sys = function() {
             name : 'moon3',
             radius : 50,
             rotation : 10,
-            pos : [900, 100, 0],
+            pos : [1150, 100, 0],
             type : 'Moon',
             rev_time : 100,
             rot_time : 3
@@ -227,7 +230,7 @@ SYSTEM.create_solar_sys = function() {
           satellites : [{
             name : 'moon4',
             radius : 30,
-            pos : [650, 0, 0],
+            pos : [700, 0, 0],
             type : 'Moon',
             rev_time : 15,
             rotation : 40,
@@ -235,7 +238,7 @@ SYSTEM.create_solar_sys = function() {
           }, {
             name : 'moon3',
             radius : 60,
-            pos : [750, 0, 0],
+            pos : [780, 0, 0],
             type : 'Moon',
             rev_time : 20,
             rot_time : 6,
@@ -243,7 +246,7 @@ SYSTEM.create_solar_sys = function() {
           }, {
             name : 'moon2',
             radius : 50,
-            pos : [750, 0, 0],
+            pos : [800, 0, 0],
             type : 'Moon',
             rev_time : 30,
             rot_time : 12,
@@ -270,7 +273,7 @@ SYSTEM.animate = function() {
 
     requestAnimationFrame(SYSTEM.animate);
 
-    if (solar_sys) {
+    if (solar_sys && option_play) {
         solar_sys.parent.traverse(function(child) {
             if (child.animate)
             child.animate();
