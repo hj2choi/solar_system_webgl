@@ -79,3 +79,13 @@ Utils.addLensFlare = function(scene, radius, x, y, z) {
 
   scene.add( lensFlare );
 }
+
+
+Utils.addSun = function(scene, radius, x,y,z) {
+  var map = THREE.ImageUtils.loadTexture( "textures/lensflare0.png" );
+  var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff, fog: true, transparent:false, alphaMap:map,blending:THREE.AdditiveBlending} );
+  var sprite = new THREE.Sprite( material );
+  sprite.scale.set(8000,8000,8000);
+  sprite.position.set(0,300,0);
+  scene.add( sprite );
+}

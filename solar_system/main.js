@@ -3,7 +3,7 @@ if (!Detector.webgl) {
     Detector.addGetWebGLMessage();
 }
 
-var renderer, camera, scene, div, controls, controller;
+var renderer, camera, scene, div, controller;
 
 var aspect = window.innerWidth / window.innerHeight;
 
@@ -48,6 +48,7 @@ SYSTEM.init = function() {
     light1.position.set(0, 0, 0);
     scene.add(light1);
     //Utils.addLensFlare(scene,1000,0,1000,0);
+    Utils.addSun(scene, 500,0,0,0);
 
     camera.lookAt(0,0,0);
 
@@ -87,7 +88,7 @@ SYSTEM.create_solar_sys = function() {
     //var star = create_star(star_info.radius, star_info.rot_time, planets);
 
     var star = {
-      radius : 800,
+      radius : 600,
       rot_time : 350,
       satellites : [
         {
@@ -259,7 +260,7 @@ SYSTEM.create_solar_sys = function() {
     	name : 'Galaxy',
     	radius : 19000,
     	scene : scene,
-	    show_grids : true,
+	    show_grids : false,
 	    star: star
     });
 }

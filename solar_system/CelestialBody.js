@@ -43,10 +43,12 @@ CelestialBody.prototype.draw = function() {
     // sun
     if (!self.name) {
       material = new THREE.MeshBasicMaterial({
-        color: 0x91FFFE,
-        wireframe: true,
+        color: 0xFFFFFF,
+        map: new THREE.TextureLoader().load("textures/sunmap.jpg"),
+        wireframe: false,
         transparent: true,
-        opacity: 1.0
+        opacity: 1.0,
+        visible:true
       });
     }
     // planets
