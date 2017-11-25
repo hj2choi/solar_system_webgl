@@ -38,16 +38,7 @@ SYSTEM.init = function() {
 
     //trackballControl(scene);
     //Initiate TrackballControls
-    /*controller = new THREE.TrackballControls( camera );
-				controller.rotateSpeed = 1.0;
-				controller.zoomSpeed = 1.2;
-				controller.panSpeed = 0.8;
-				//controller.noZoom = false;
-				//controller.noPan = false;
-				controller.staticMoving = true;
-				//controller.dynamicDampingFactor = 0.3;
-				//controller.keys = [ 65, 83, 68 ];
-				controller.addEventListener( 'change', renderer );*/
+    controller = new THREE.TrackballControls(camera, renderer.domElement);
 
     Utils.addBackgroundStars(scene,30000);
     // LIGHT
@@ -71,9 +62,7 @@ SYSTEM.on_window_resize = function() {
 
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    if (controls)
-    	controls.handleResize();
-    //controller.handleResize();
+    controller.handleResize();
 }
 
 // global var solar_sys to store the solar system instance
@@ -287,10 +276,7 @@ SYSTEM.animate = function() {
         });
     }
 
-    if (controls)
-    	controls.update();
-    //controller.update();
-    //controller.update(delta);
+    controller.update();
     renderer.render(scene, camera);
 }
 
