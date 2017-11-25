@@ -1,4 +1,5 @@
 function SolarSystem(solar_sys_info_obj) {
+    //console.log("SOLARSYSTEM CONSTRUCTOR");
     var self_solar_sys = this;
 
     self_solar_sys.name = solar_sys_info_obj.name;
@@ -15,8 +16,9 @@ function SolarSystem(solar_sys_info_obj) {
     self_solar_sys.add_all();
 
     // show grid or not
-    if (self_solar_sys.show_grids)
-        self_solar_sys.grids();
+    self_solar_sys.grid_arr = [];
+
+    self_solar_sys.grids();
 
     return self_solar_sys;
 }
@@ -30,14 +32,18 @@ SolarSystem.prototype.add_all = function() {
         parent : self.parent,
         satellites : self.star.satellites
     });
+    //console.log("THE SUN");
+    //console.log(THE_SUN);
 }
 
 SolarSystem.prototype.grids = function() {
     var self = this;
 
     var grid_material = new THREE.LineBasicMaterial({
-        color: 0xeeeeee,
-	    opacity : 0.1
+      color: 0x329ca4,
+      transparent:true,
+	    opacity : 1,
+      visible : false
     });
 
     var geometry = new THREE.Geometry();
@@ -52,6 +58,7 @@ SolarSystem.prototype.grids = function() {
     	var line = new THREE.Line(geometry, grid_material);
     	line.rotation.set(0, (i * Math.PI) / (AXIS / 2), 0);
     	self.parent.add(line);
+      self.grid_arr.push(line);
     }
 
     // defines the extent of gaps between grid circles
@@ -65,9 +72,10 @@ SolarSystem.prototype.grids = function() {
         circle.absarc( 0, 0, i * circle_distance, 0, Math.PI*2, false );
 
         var points = circle.createPointsGeometry(100);
-        v_circle = new THREE.Line(points, new THREE.LineBasicMaterial({color : 0xeeeeee, opacity : 0.05, linewidth: 1}));
+        v_circle = new THREE.Line(points, new THREE.LineBasicMaterial({color : 0x329ca4, transparent:true, visible : false, linewidth: 1}));
 
         v_circle.rotation.set(Math.PI/2, 0, 0);
         self.parent.add(v_circle);
+        self.grid_arr.push(v_circle);
     }
 }

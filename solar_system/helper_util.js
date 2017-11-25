@@ -20,6 +20,7 @@ function create_planet(name, radius, rotation, pos, type, rev_time, rot_time, sa
     return {
         name : name,
         radius : radius,
+        rotation : rotation,
         pos : pos,
         type : type,
         rev_time : rev_time,
@@ -74,9 +75,13 @@ function create_star(radius, rot_time, satellites) {
 */
 Utils = {}
 
+var stars_material;
+var stars_material2;
+var stars_material3;
+
 Utils.addBackgroundStars = function(scene, distance) {
   var stars_geometry = new THREE.Geometry();
-  var stars_material = new THREE.ParticleBasicMaterial({color:0xe6e6fa, opacity:0.3, size:1,sizeAttenuation:false});
+  stars_material = new THREE.ParticleBasicMaterial({color:0xe6e6fa, opacity:0.3, size:1,sizeAttenuation:false});
   var background_stars;
   for (var i =0; i<5000; ++i) {
     var vertex = new THREE.Vector3();
@@ -91,7 +96,7 @@ Utils.addBackgroundStars = function(scene, distance) {
   scene.add(background_stars);
 
   var stars_geometry = new THREE.Geometry();
-  var stars_material = new THREE.ParticleBasicMaterial({color:0xa6a6da, opacity:1, size:1,sizeAttenuation:false});
+  stars_material2 = new THREE.ParticleBasicMaterial({color:0xa6a6da, opacity:1, size:1,sizeAttenuation:false});
   var background_stars;
   for (var i =0; i<5000; ++i) {
     var vertex = new THREE.Vector3();
@@ -101,12 +106,12 @@ Utils.addBackgroundStars = function(scene, distance) {
     vertex.multiplyScalar(distance);
     stars_geometry.vertices.push(vertex);
   }
-  background_stars = new THREE.ParticleSystem(stars_geometry, stars_material);
+  background_stars = new THREE.ParticleSystem(stars_geometry, stars_material2);
   background_stars.scale.set(20,20,20);
   scene.add(background_stars);
 
   var stars_geometry = new THREE.Geometry();
-  var stars_material = new THREE.ParticleBasicMaterial({color:0xe6e6fa, opacity:0.8, size:2,sizeAttenuation:false});
+  stars_material3 = new THREE.ParticleBasicMaterial({color:0xe6e6fa, opacity:0.8, size:2,sizeAttenuation:false});
   var background_stars;
   for (var i =0; i<500; ++i) {
     var vertex = new THREE.Vector3();
@@ -116,7 +121,7 @@ Utils.addBackgroundStars = function(scene, distance) {
     vertex.multiplyScalar(distance);
     stars_geometry.vertices.push(vertex);
   }
-  background_stars = new THREE.ParticleSystem(stars_geometry, stars_material);
+  background_stars = new THREE.ParticleSystem(stars_geometry, stars_material3);
   background_stars.scale.set(20,20,20);
   scene.add(background_stars);
 }
@@ -154,12 +159,56 @@ Utils.addLensFlare = function(scene, radius, x, y, z) {
   scene.add( lensFlare );
 }
 
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+var existing_pos_rad = [];
+
+Utils.addAsteroids = function(count) {
+  var sun_celestial_body = gl_objects[0];
+  sun_celestial_body.new_asteroid_info = [];
+  var mars_end = 7200*2;
+  var jupiter_start = 8600*2;
+
+  for (var i = 0; i < count; i++) {
+
+    var overlapped = true;
+    var asteroid_rad = getRandom(40, 100);
+    var pos_x;
+    while (overlapped) {
+      overlapped=false;
+      pos_x = getRandom(mars_end, jupiter_start);
+
+      // check if position already exists
+      for (var j = 0; j < existing_pos_rad; j++) {
+        if (Math.abs(pos_x - existing_pos_rad[j][0]) <= asteroid_rad[j][1] + 5) {
+          overlapped = true;
+          break;
+        }
+      }
+    }
+
+    var asteroid_speed = getRandom(50, 500);
+    var pos_y = getRandom(-400, 400);
+    var rottt = getRandom(-6, 6);
+
+    existing_pos_rad.push([pos_x, asteroid_rad]);
+
+    var new_ast_info = create_satellite("asteroid" + (asteroids_count + (1 + i)), asteroid_rad, rottt, [-pos_x, pos_y, pos_y], "asteroid", asteroid_speed, 10);
+
+    // add to sun_celestial_body.new_asteroid_info
+    sun_celestial_body.new_asteroid_info.push(new_ast_info);
+  }
+
+  sun_celestial_body.draw_asteroids();
+}
 
 Utils.addSun = function(scene, radius, x,y,z) {
   var map = THREE.ImageUtils.loadTexture( "textures/lensflare0.png" );
   var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff, fog: true, transparent:false, alphaMap:map,blending:THREE.AdditiveBlending} );
   var sprite = new THREE.Sprite( material );
-  sprite.scale.set(8000,8000,8000);
+  sprite.scale.set(12000,12000,12000);
   sprite.position.set(0,300,0);
   scene.add( sprite );
 }

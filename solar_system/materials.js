@@ -52,7 +52,7 @@ Materials.loadSatelliteMat = function(satellite_name) {
   if (TEXTURE_NAMES.indexOf(satellite_name)==-1) {
     texture_file = TEXTURE_NAMES[parseInt(Math.random()*TEXTURE_NAMES.length)];
   }
-  //console.log(texture_file);
+  console.log(texture_file);
   return new THREE.MeshStandardMaterial({
     color: 0xF3FFE2,
     roughness: 0.8,

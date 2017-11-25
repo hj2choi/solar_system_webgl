@@ -1,3 +1,31 @@
+function getPlanetNames() {
+  //console.log("solarSystem:");
+  //console.log(solar_sys.star.satellites);
+  //console.log("THE SUN");
+  //console.log(THE_SUN);
+  var names = ["sun"];
+  solar_sys.star.satellites.forEach(function(element){
+    names.push(element.name);
+  });
+  return names;
+}
+function getPlanetNames2() {
+  //console.log("solarSystem:");
+  //console.log(solar_sys.star.satellites);
+  //console.log("THE SUN");
+  //console.log(THE_SUN);
+  var names = ["free cam","sun"];
+  solar_sys.star.satellites.forEach(function(element){
+    names.push(element.name);
+  });
+  return names;
+}
+
+var ASTEROIDS_NUM = 10;
+var camera_focus;
+var camera_from;
+var asteroid_button;
+var asteroids_count = 0;
 function displayGUI() {
   var gui = new dat.GUI();
   var jar;
@@ -12,28 +40,44 @@ function displayGUI() {
     e: "",
     f: "",
     g:1,h:1,i:1,
-    camera_focus:"Sun",
+    camera_focus:"sun",
+    camera_from:"free cam",
     play:true,
     playback_speed:1,
-    show_wireframe:false
+    show_wireframe:false,
+    show_grids:false,
+    show_background:true
   }
 
   var playback_folder = gui.addFolder('playback');
   var play = playback_folder.add(parameters, 'play').name('play');
   play.onChange(onChangePlay);
-  var playback_speed = playback_folder.add(parameters, 'playback_speed').min(0).max(5).step(gui_step).name('speed');
+  var playback_speed = playback_folder.add(parameters, 'playback_speed').min(0).max(10).step(gui_step).name('speed');
   playback_speed.onChange(onChangePlaybackSpeed);
   playback_folder.open();
 
   var camera_folder = gui.addFolder('camera control');
-  var camera_focus = camera_folder.add(parameters, 'camera_focus', ["Sun","Earth", "Jupiter", "NewPlanet","newPlanet2"]).name('Look at');
+  camera_focus = camera_folder.add(parameters, 'camera_focus', getPlanetNames2()).name('look at');
+  camera_from = camera_folder.add(parameters, 'camera_from', getPlanetNames2()).name('look from');
+  camera_folder.add({ Reset:onResetCameraPos},'Reset').name('reset camera');
+  camera_folder.add({ ResetC:onResetCameraPosCeil},'ResetC').name('ceiling view');
   camera_focus.onChange(onChangeCameraFocus);
+  camera_from.onChange(onChangeCameraPos);
   camera_folder.open();
 
   var graphics_folder = gui.addFolder('graphics');
   var show_wireframe = graphics_folder.add(parameters, 'show_wireframe').name('show wireframe');
   show_wireframe.onChange(onChangeWireframeDisplay);
+  var show_grids = graphics_folder.add(parameters, 'show_grids').name('show grids');
+  show_grids.onChange(onChangeGridDisplay);
+  var show_background = graphics_folder.add(parameters, 'show_background').name('show stars');
+  show_background.onChange(onChangeBackgroundDisplay);
   graphics_folder.open();
+
+  var misc_folder = gui.addFolder('misc');
+  asteroid_button = misc_folder.add({ Add:onAddAsteroids},'Add').name('+ asteroids (0)');
+  misc_folder.open();
+
 /*
   var folder1 = gui.addFolder('folder1');
   var folder2 = gui.addFolder('position');
@@ -64,13 +108,106 @@ function onChangePlay(param) {
 }
 
 function onChangePlaybackSpeed(param) {
-  console.log("playback_speed = "+param);
+  option_playback_speed = param;
+  //console.log("playback_speed = "+param);
 }
 
 function onChangeCameraFocus(param) {
-  console.log("focusing on "+param);
+
+  //console.log("focusing on "+param);
+  //console.log(gl_objects);
+  option_camera_focus = null;
+  /*solar_sys.parent.traverse(function(child) {
+    console.log(child);
+
+  });*/
+  gl_objects.forEach(function(element){
+    if (element.name==param) {
+      option_camera_focus = element.body_mesh;
+    }
+  });
+  if (param=='free cam') {
+    option_camera_focus = 1;
+  }
+  console.log(option_camera_focus);
+
+}
+
+function onChangeCameraPos(param) {
+  //console.log("camera pos = "+param);
+  option_camera_pos = null;
+  gl_objects.forEach(function(element){
+    if (element.name==param) {
+      option_camera_pos = element;
+    }
+  });
+  if (param=='sun') {
+    option_camera_pos = 1;
+  }
+  //console.log(option_camera_pos);
 }
 
 function onChangeWireframeDisplay(param) {
-  console.log("show wireframe = "+param);
+  //console.log("show wireframe = "+param);
+  gl_objects.forEach(function(element){
+    if (!element.previous_material) {
+      element.previous_material = element.body_material;
+    }
+    if (param) {
+      element.body_mesh.material = new THREE.MeshBasicMaterial({
+        color: 0xB9F442,
+        wireframe: true,
+        transparent: true,
+        opacity: 1.0,
+        visible:true
+      });
+    }
+    else {
+      element.body_mesh.material = element.previous_material;
+    }
+  });
+}
+
+function onChangeGridDisplay(param){
+  //console.log(param);
+  solar_sys.grid_arr.forEach(function(element){
+    if (element.material) {
+      element.material.visible=param;
+    }
+    console.log(element);
+  });
+}
+
+function onChangeBackgroundDisplay(param) {
+  stars_material.visible=param;
+  stars_material2.visible=param;
+  stars_material3.visible=param;
+}
+
+function onResetCameraPos() {
+  camera.position.set(init_camera_pos[0], init_camera_pos[1], init_camera_pos[2]);
+  camera.up.set(0,1,0);
+  controller.target = new THREE.Vector3(0,0,0);
+  option_camera_focus = null;
+  option_camera_pos = null;
+  camera_focus.setValue('sun');
+  camera_from.setValue('free cam');
+}
+
+function onResetCameraPosCeil() {
+  camera.position.set(0, init_camera_pos[0]*1.5, init_camera_pos[2]);
+  camera.up.set(0,1,0);
+  controller.target = new THREE.Vector3(0,0,0);
+  option_camera_focus = null;
+  option_camera_pos = null;
+  camera_focus.setValue('sun');
+  camera_from.setValue('free cam');
+}
+
+function onAddAsteroids() {
+  console.log(asteroid_button);
+
+  Utils.addAsteroids(ASTEROIDS_NUM);
+  asteroids_count+=ASTEROIDS_NUM;
+  asteroid_button.name('+ asteroids ('+asteroids_count+')');
 }
