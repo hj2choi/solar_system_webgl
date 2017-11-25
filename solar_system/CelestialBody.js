@@ -9,13 +9,11 @@ function CelestialBody(body_info_obj) {
     self.scene = body_info_obj.scene || null;
     self.is_satellite = body_info_obj.is_satellite || false;
 
-    console.log(self.name);
 
     self.parallel_to_orbit = new THREE.Object3D();
     self.parallel_to_orbit.rotation.x = (Math.PI/180) * (body_info_obj.rotation || 0);
 
     self.pos = (body_info_obj.pos ? body_info_obj.pos : [0, 0, 0]);
-    console.log(self.pos);
 
     self.body_obj = new THREE.Object3D();
     self.body_obj.position.set(self.pos[0], 0, self.pos[2]);
@@ -40,11 +38,33 @@ function CelestialBody(body_info_obj) {
 
 CelestialBody.prototype.draw = function() {
     var self = this;
-    var geometry = new THREE.SphereGeometry(self.radius, 16, 16);
-    var material = new THREE.MeshBasicMaterial({
+    var material;
+
+    // sun
+    if (!self.name) {
+      material = new THREE.MeshBasicMaterial({
         color: 0x91FFFE,
-        wireframe: true
-    });
+        wireframe: true,
+        transparent: true,
+        opacity: 1.0
+      });
+    }
+    // planets
+    else if (PLANET_NAMES.indexOf(self.name)!=-1) {
+      material = Materials.loadPlanetMat(PLANET_NAMES.indexOf(self.name));
+    }
+    // clouds and stuff
+    else if (self.name.startsWith("OVERLAY")) {
+      info = self.name.substr(8);
+      //console.log(info);
+      material = Materials.loadSphereMat(info, 0.8, 0.1, 0.3);
+    }
+    // satellites or unspecified
+    else {
+      material = Materials.loadSatelliteMat(self.name);
+    }
+
+    var geometry = new THREE.SphereGeometry(self.radius, 16, 16);
 
     self.body_mesh = new THREE.Mesh(geometry, material);
 
