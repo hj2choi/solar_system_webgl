@@ -320,13 +320,13 @@ function camera_control() {
 
 SYSTEM.animate = function() {
   var delta = clock.getDelta();
-
+  //console.log(delta);
   requestAnimationFrame(SYSTEM.animate);
 
   if (solar_sys && option_play) {
       solar_sys.parent.traverse(function(child) {
           if (child.animate)
-            child.animate(option_playback_speed);
+            child.animate(option_playback_speed*delta*60);
       });
   }
 

@@ -129,7 +129,7 @@ function onChangeCameraFocus(param) {
   if (param=='free cam') {
     option_camera_focus = 1;
   }
-  console.log(option_camera_focus);
+  //console.log(option_camera_focus);
 
 }
 
@@ -174,7 +174,7 @@ function onChangeGridDisplay(param){
     if (element.material) {
       element.material.visible=param;
     }
-    console.log(element);
+    //console.log(element);
   });
 }
 
@@ -205,7 +205,7 @@ function onResetCameraPosCeil() {
 }
 
 function onAddAsteroids() {
-  console.log(asteroid_button);
+  //console.log(asteroid_button);
 
   Utils.addAsteroids(ASTEROIDS_NUM);
   asteroids_count+=ASTEROIDS_NUM;
