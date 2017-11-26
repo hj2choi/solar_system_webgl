@@ -42,7 +42,7 @@ SYSTEM.init = function() {
     controller = new THREE.TrackballControls(camera, renderer.domElement);
     console.log(controller.target);
     // add misc objects
-    Utils.addBackgroundStars(scene,30000);
+    Utils.addBackgroundStars(scene,100000);
     // LIGHT
     var light = new THREE.AmbientLight(0xffffff, 0.2);
     scene.add(light);
