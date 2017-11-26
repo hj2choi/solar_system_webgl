@@ -195,8 +195,8 @@ function onResetCameraPos() {
 }
 
 function onResetCameraPosCeil() {
-  camera.position.set(0, init_camera_pos[0]*1.5, init_camera_pos[2]);
   camera.up.set(0,1,0);
+  camera.position.set(1000, init_camera_pos[0]*1.5, init_camera_pos[2]);
   controller.target = new THREE.Vector3(0,0,0);
   option_camera_focus = null;
   option_camera_pos = null;
