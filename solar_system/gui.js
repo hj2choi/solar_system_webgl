@@ -21,7 +21,7 @@ function getPlanetNames2() {
   return names;
 }
 
-var ASTEROIDS_NUM = 10;
+var ASTEROIDS_NUM = 20;
 var camera_focus;
 var camera_from;
 var asteroid_button;

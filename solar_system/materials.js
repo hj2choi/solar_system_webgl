@@ -19,6 +19,13 @@ var TEXTURE_NAMES = [
   "moon4"
 ]
 
+
+var AST_NAMES = [
+  "asteroid2",
+  "asteroid",
+  "asteroid4"
+]
+
 var PLANETS_REFLECTIVE_PARAMS = [
   [0.6, 0.12],
   [0.9, 0.5],
@@ -48,9 +55,13 @@ Materials.loadPlanetMat = function(planet_id) {
 }
 
 Materials.loadSatelliteMat = function(satellite_name) {
+  var rough = 0.7
+  var metal = 0.4
   texture_file = satellite_name;
   if (TEXTURE_NAMES.indexOf(satellite_name)==-1) {
-    texture_file = TEXTURE_NAMES[parseInt(Math.random()*TEXTURE_NAMES.length)];
+    texture_file = AST_NAMES[parseInt(Math.random()*AST_NAMES.length)];
+    rough = 0.3
+    metal = 1
   }
   console.log(texture_file);
   return new THREE.MeshStandardMaterial({
