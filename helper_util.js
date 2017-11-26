@@ -88,11 +88,11 @@ Utils.addBackgroundStars = function(scene, distance) {
     vertex.x = Math.random()*2-1;
     vertex.y = Math.random()*2-1;
     vertex.z = Math.random()*2-1;
-    vertex.multiplyScalar(distance);
+    vertex.multiplyScalar(distance*1.4);
     stars_geometry.vertices.push(vertex);
   }
   background_stars = new THREE.ParticleSystem(stars_geometry, stars_material);
-  background_stars.scale.set(20,20,20);
+  background_stars.scale.set(5,5,5);
   scene.add(background_stars);
 
   var stars_geometry = new THREE.Geometry();
@@ -103,11 +103,11 @@ Utils.addBackgroundStars = function(scene, distance) {
     vertex.x = Math.random()*2-1;
     vertex.y = Math.random()*2-1;
     vertex.z = Math.random()*2-1;
-    vertex.multiplyScalar(distance);
+    vertex.multiplyScalar(distance*1.2);
     stars_geometry.vertices.push(vertex);
   }
   background_stars = new THREE.ParticleSystem(stars_geometry, stars_material2);
-  background_stars.scale.set(20,20,20);
+  background_stars.scale.set(5,5,5);
   scene.add(background_stars);
 
   var stars_geometry = new THREE.Geometry();
@@ -118,11 +118,11 @@ Utils.addBackgroundStars = function(scene, distance) {
     vertex.x = Math.random()*2-1;
     vertex.y = Math.random()*2-1;
     vertex.z = Math.random()*2-1;
-    vertex.multiplyScalar(distance);
+    vertex.multiplyScalar(distance*0.9);
     stars_geometry.vertices.push(vertex);
   }
   background_stars = new THREE.ParticleSystem(stars_geometry, stars_material3);
-  background_stars.scale.set(20,20,20);
+  background_stars.scale.set(5,5,5);
   scene.add(background_stars);
 }
 
