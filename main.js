@@ -83,10 +83,8 @@ SYSTEM.create_solar_sys = function() {
         {
           name : 'mercury',
           radius : 150*scl,
-          project : true,
           rotation : 0,
           pos : [1800*mul, 0, 0],
-          type : 'vividEarth',
           rev_time : 70,
           rot_time : 10,
           satellites : [{
@@ -94,7 +92,6 @@ SYSTEM.create_solar_sys = function() {
             radius : 12*scl,
             rotation:40,
             pos : [200*scl, 0, 0],
-            type : 'Moon',
             rev_time : 20,
             rot_time : 3
           }]
@@ -102,7 +99,6 @@ SYSTEM.create_solar_sys = function() {
           name : 'venus',
           radius : 260*scl,
           rotation : 0,
-          project : true,
           pos : [2800*mul, 0, 0],
           rev_time : 140,
           rot_time : 30
@@ -110,7 +106,6 @@ SYSTEM.create_solar_sys = function() {
           name : 'earth',
           radius : 300*scl,
           rotation : 0,
-          project : true,
           pos : [4000*mul, 0, 0],
           rev_time : 200,
           rot_time : 30,
@@ -124,7 +119,6 @@ SYSTEM.create_solar_sys = function() {
             name : 'moon',
             radius : 60*scl,
             pos : [540*scl, 0, 0],
-            type : 'Moon',
             rev_time : 45,
             rot_time : 3
           }]
@@ -133,13 +127,11 @@ SYSTEM.create_solar_sys = function() {
           radius : 200*scl,
           pos : [5200*mul, 0, 0],
           rev_time : 350,
-          project : true,
           rot_time : 30,
           satellites : [{
             name : 'moon2',
             radius : 20*scl,
             pos : [300*scl, 0, 0],
-            type : 'Moon',
             rev_time : 15,
             rotation : 0,
             rot_time : 3
@@ -147,7 +139,6 @@ SYSTEM.create_solar_sys = function() {
             name : 'moon3',
             radius : 10*scl,
             pos : [240*scl, 0, 0],
-            type : 'Moon',
             rev_time : 20,
             rot_time : 3,
             rotation : -20
@@ -155,10 +146,8 @@ SYSTEM.create_solar_sys = function() {
         }, {
           name : 'jupiter',
           radius : 1000*scl,
-          project : true,
           rotation : 0,
           pos : [10000*mul, 0, 0],
-          type : 'vividEarth',
           rev_time : 700,
           rot_time : 100,
           satellites : [{
@@ -166,7 +155,6 @@ SYSTEM.create_solar_sys = function() {
             radius : 80*scl,
             rotation : 50,
             pos : [1050*scl, 0, 0],
-            type : 'Moon',
             rev_time : 200,
             rot_time : 3
           }, {
@@ -174,17 +162,14 @@ SYSTEM.create_solar_sys = function() {
             radius : 50*scl,
             rotation : 10,
             pos : [1150*scl, 100, 0],
-            type : 'Moon',
             rev_time : 100,
             rot_time : 3
           }]
         },{
           name : 'saturn',
           radius : 900*scl,
-          project : true,
           rotation : 0,
           pos : [14000*mul, 0, 0],
-          type : 'vividEarth',
           rev_time : 1100,
           rot_time : 40,
           satellites : [{
@@ -192,33 +177,27 @@ SYSTEM.create_solar_sys = function() {
             radius : 100*scl,
             rotation : 50,
             pos : [1000*scl, 0, 0],
-            type : 'Moon',
             rev_time : 200,
             rot_time : 3
           }]
         }, {
           name : 'uranus',
           radius : 700*scl,
-          project : true,
           rotation : 0,
           pos : [17000*mul, 0, 0],
-          type : 'vividEarth',
           rev_time : 2500,
           rot_time : 180
         }, {
           name : 'neptune',
           radius : 750*scl,
-          project : true,
           rotation : 0,
           pos : [-22000*mul, 0, 0],
-          type : 'vividEarth',
           rev_time : 3500,
           rot_time : 100,
           satellites : [{
             name : 'moon4',
             radius : 30*scl,
             pos : [700*scl, 0, 0],
-            type : 'Moon',
             rev_time : 15,
             rotation : 40,
             rot_time : 8
@@ -226,7 +205,6 @@ SYSTEM.create_solar_sys = function() {
             name : 'moon3',
             radius : 60*scl,
             pos : [780*scl, 0, 0],
-            type : 'Moon',
             rev_time : 20,
             rot_time : 6,
             rotation : -200
@@ -234,7 +212,6 @@ SYSTEM.create_solar_sys = function() {
             name : 'moon2',
             radius : 50*scl,
             pos : [800*scl, 0, 0],
-            type : 'Moon',
             rev_time : 30,
             rot_time : 12,
             rotation : -80
@@ -252,6 +229,7 @@ SYSTEM.create_solar_sys = function() {
     });
 }
 
+// camera look-at and look-from controls
 function camera_control() {
 
   if (option_camera_focus==1){

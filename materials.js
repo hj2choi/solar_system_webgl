@@ -11,7 +11,7 @@ var PLANET_NAMES = [
   "neptune"
 ]
 
-var TEXTURE_NAMES = [
+var MOON_NAMES = [
   "moon",
   "moon1",
   "moon2",
@@ -25,7 +25,6 @@ var AST_NAMES = [
   "asteroid",
   "asteroid4",
   "ast"
-
 ]
 
 var PLANETS_REFLECTIVE_PARAMS = [
@@ -58,7 +57,7 @@ Materials.loadSatelliteMat = function(satellite_name) {
   var rough = 0.7
   var metal = 0.4
   texture_file = satellite_name;
-  if (TEXTURE_NAMES.indexOf(satellite_name)==-1) {
+  if (MOON_NAMES.indexOf(satellite_name)==-1) {
     texture_file = AST_NAMES[parseInt(Math.random()*AST_NAMES.length)];
     rough = 0.3
     metal = 1
