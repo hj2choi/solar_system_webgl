@@ -40,7 +40,6 @@ SYSTEM.init = function() {
     div.appendChild(renderer.domElement);
     window.addEventListener('resize', self.on_window_resize, false );
     controller = new THREE.TrackballControls(camera, renderer.domElement);
-    console.log(controller.target);
     // add misc objects
     Utils.addBackgroundStars(scene,120000);
     // LIGHT
@@ -281,7 +280,6 @@ function camera_control() {
   } else if (option_camera_pos) {
     scene.updateMatrixWorld();
     var vector = new THREE.Vector3();
-    // option_camera_pos: body_mesh
     var radius = option_camera_pos.radius;
 
     var view_vector = new THREE.Vector3();

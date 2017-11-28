@@ -31,7 +31,6 @@ function CelestialBody(body_info_obj) {
     self.draw();
     self.draw_satellites();
     self.animations();
-    self.draw_rev_circles();
 
     return self;
 }
