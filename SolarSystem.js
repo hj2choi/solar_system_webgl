@@ -1,5 +1,4 @@
 function SolarSystem(solar_sys_info_obj) {
-    //console.log("SOLARSYSTEM CONSTRUCTOR");
     var self_solar_sys = this;
 
     self_solar_sys.name = solar_sys_info_obj.name;
@@ -32,8 +31,6 @@ SolarSystem.prototype.add_all = function() {
         parent : self.parent,
         satellites : self.star.satellites
     });
-    //console.log("THE SUN");
-    //console.log(THE_SUN);
 }
 
 SolarSystem.prototype.grids = function() {
