@@ -41,8 +41,6 @@ var PLANETS_REFLECTIVE_PARAMS = [
 
 
 Materials.loadPlanetMat = function(planet_id) {
-  //console.log(PLANET_NAMES[planet_id]);
-  //console.log("hi");
   return new THREE.MeshStandardMaterial({
     color: 0xF3FFE2,
     roughness: PLANETS_REFLECTIVE_PARAMS[planet_id][0],

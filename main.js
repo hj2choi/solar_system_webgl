@@ -243,9 +243,6 @@ SYSTEM.create_solar_sys = function() {
       ]
     }
 
-
-    //console.log(star);
-
     solar_sys = new SolarSystem({
     	name : 'Galaxy',
     	radius : 45000,

@@ -121,7 +121,7 @@ CelestialBody.prototype.draw = function() {
       self.body_mesh.position.set(0,0,0);
       //scene.add(self.body_mesh);
     }
-    //console.log(self);
+
     // add to datastructure
     gl_objects.push(self);
     /*THE_SUN.star.satellites.forEach(function(element){
@@ -147,20 +147,6 @@ CelestialBody.prototype.draw_asteroids = function() {
     for (var i = 0; i < self.new_asteroid_info.length; i++) {
         draw_asteroid(self.new_asteroid_info[i]);
     }
-
-    /*var self = this;
-
-    console.log(self.satellites_info);
-        self.satellites_info.forEach(function(dt) {
-    	dt['is_satellite'] = true;
-
-    	dt['scene'] = scene;
-    	console.log(scene);
-    	console.log(self.scene);
-
-    	dt.parent = self.body_obj;
-    	var pl = new CelestialBody(dt);
-        });*/
 }
 
 CelestialBody.prototype.draw_satellites = function() {
@@ -175,20 +161,6 @@ CelestialBody.prototype.draw_satellites = function() {
     for (var i = 0; i < self.satellites_info.length; i++) {
         draw_satellite(self.satellites_info[i]);
     }
-
-    /*var self = this;
-
-    console.log(self.satellites_info);
-        self.satellites_info.forEach(function(dt) {
-    	dt['is_satellite'] = true;
-
-    	dt['scene'] = scene;
-    	console.log(scene);
-    	console.log(self.scene);
-
-    	dt.parent = self.body_obj;
-    	var pl = new CelestialBody(dt);
-        });*/
 }
 
 // add animations

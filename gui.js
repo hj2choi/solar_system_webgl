@@ -1,8 +1,4 @@
 function getPlanetNames() {
-  //console.log("solarSystem:");
-  //console.log(solar_sys.star.satellites);
-  //console.log("THE SUN");
-  //console.log(THE_SUN);
   var names = ["sun"];
   solar_sys.star.satellites.forEach(function(element){
     names.push(element.name);
@@ -10,10 +6,6 @@ function getPlanetNames() {
   return names;
 }
 function getPlanetNames2() {
-  //console.log("solarSystem:");
-  //console.log(solar_sys.star.satellites);
-  //console.log("THE SUN");
-  //console.log(THE_SUN);
   var names = ["free cam","sun"];
   solar_sys.star.satellites.forEach(function(element){
     names.push(element.name);
@@ -103,24 +95,15 @@ function displayGUI() {
 }
 
 function onChangePlay(param) {
-  //console.log("play = "+param);
   option_play = param;
 }
 
 function onChangePlaybackSpeed(param) {
   option_playback_speed = param;
-  //console.log("playback_speed = "+param);
 }
 
 function onChangeCameraFocus(param) {
-
-  //console.log("focusing on "+param);
-  //console.log(gl_objects);
   option_camera_focus = null;
-  /*solar_sys.parent.traverse(function(child) {
-    console.log(child);
-
-  });*/
   gl_objects.forEach(function(element){
     if (element.name==param) {
       option_camera_focus = element.body_mesh;
@@ -129,12 +112,9 @@ function onChangeCameraFocus(param) {
   if (param=='free cam') {
     option_camera_focus = 1;
   }
-  //console.log(option_camera_focus);
-
 }
 
 function onChangeCameraPos(param) {
-  //console.log("camera pos = "+param);
   option_camera_pos = null;
   gl_objects.forEach(function(element){
     if (element.name==param) {
@@ -144,11 +124,9 @@ function onChangeCameraPos(param) {
   if (param=='sun') {
     option_camera_pos = 1;
   }
-  //console.log(option_camera_pos);
 }
 
 function onChangeWireframeDisplay(param) {
-  //console.log("show wireframe = "+param);
   gl_objects.forEach(function(element){
     if (!element.previous_material) {
       element.previous_material = element.body_material;
@@ -169,12 +147,10 @@ function onChangeWireframeDisplay(param) {
 }
 
 function onChangeGridDisplay(param){
-  //console.log(param);
   solar_sys.grid_arr.forEach(function(element){
     if (element.material) {
       element.material.visible=param;
     }
-    //console.log(element);
   });
 }
 
@@ -205,8 +181,6 @@ function onResetCameraPosCeil() {
 }
 
 function onAddAsteroids() {
-  //console.log(asteroid_button);
-
   Utils.addAsteroids(ASTEROIDS_NUM);
   asteroids_count+=ASTEROIDS_NUM;
   asteroid_button.name('+ asteroids ('+asteroids_count+')');
