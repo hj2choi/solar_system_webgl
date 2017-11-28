@@ -173,21 +173,9 @@ Utils.addAsteroids = function(count) {
 
   for (var i = 0; i < count; i++) {
 
-    var overlapped = true;
     var asteroid_rad = getRandom(10, 50);
     var pos_x;
-    while (overlapped) {
-      overlapped=false;
-      pos_x = getRandom(mars_end, jupiter_start);
-
-      // check if position already exists
-      /*for (var j = 0; j < existing_pos_rad; j++) {
-        if (Math.abs(pos_x - existing_pos_rad[j][0]) <= asteroid_rad[j][1] + 5) {
-          overlapped = true;
-          break;
-        }
-      }*/
-    }
+    pos_x = getRandom(mars_end, jupiter_start);
 
     var asteroid_speed = getRandom(50, 500);
     var pos_y = getRandom(-400, 400);
