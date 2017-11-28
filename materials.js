@@ -65,7 +65,7 @@ Materials.loadSatelliteMat = function(satellite_name) {
     rough = 0.3
     metal = 1
   }
-  //console.log(texture_file);
+
   return new THREE.MeshStandardMaterial({
     color: 0xF3FFE2,
     roughness: 0.8,

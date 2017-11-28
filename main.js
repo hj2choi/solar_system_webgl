@@ -49,7 +49,6 @@ SYSTEM.init = function() {
     var light1 = new THREE.PointLight(0xffffff, 2, 100000);
     light1.position.set(0, 0, 0);
     scene.add(light1);
-    //Utils.addLensFlare(scene,1000,0,1000,0);
     Utils.addSun(scene, 500,0,0,0);
 
 
@@ -76,22 +75,6 @@ var gl_objects=[];
 
 SYSTEM.create_solar_sys = function() {
     // create star from solar_system_info
-    /*
-    var planets = [];
-    for (var i = 0; i < planet_info_arr.length; i++) {
-        var curr_planet_info = planet_info_arr[i];
-        var satellites = [];
-        for (var j = 0; j < curr_planet_info.satellites.length; j++) {
-            var curr_satellite = curr_planet_info.satellites[j];
-            satellites.push(curr_satellite);
-        }
-        curr_planet_info.satellites = satellites;
-        var curr_planet = curr_planet_info;
-        planets.push(curr_planet);
-    }*/
-
-    //var star = create_star(star_info.radius, star_info.rot_time, planets);
-
     var mul = 2;
     var scl = 1.5;
     var star = {
@@ -275,9 +258,7 @@ SYSTEM.create_solar_sys = function() {
 
 function camera_control() {
 
-  //console.log(option_camera_focus);
   if (option_camera_focus==1){
-    //camera.lookAt(0,0,0);
   } else if (option_camera_focus) {
     scene.updateMatrixWorld();
     var vector = new THREE.Vector3();
@@ -293,7 +274,6 @@ function camera_control() {
     camera.position.set(0,0,0);
     var view_vector = new THREE.Vector3();
     camera.getWorldDirection(view_vector);
-    //vector.setFromMatrixPosition(option_camera_pos.body_mesh.matrixWorld);
     vector.x = view_vector.x * radius;
     vector.y = view_vector.y * radius;
     vector.z = view_vector.z * radius;
@@ -309,7 +289,6 @@ function camera_control() {
     camera.getWorldDirection(view_vector);
 
     vector.setFromMatrixPosition(option_camera_pos.body_mesh.matrixWorld);
-    //console.log(vector);
     vector.x += view_vector.x * radius;
     vector.y += view_vector.y * radius;
     vector.z += view_vector.z * radius;
@@ -320,7 +299,6 @@ function camera_control() {
 
 SYSTEM.animate = function() {
   var delta = clock.getDelta();
-  //console.log(delta);
   requestAnimationFrame(SYSTEM.animate);
 
   if (solar_sys && option_play) {

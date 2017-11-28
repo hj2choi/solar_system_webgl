@@ -216,6 +216,3 @@ CelestialBody.prototype.animations = function() {
         });
     };
 }
-
-CelestialBody.prototype.draw_rev_circles = function() {
-}
